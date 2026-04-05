@@ -1,59 +1,10 @@
-@import './variables.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: var(--bg-primary);
-  --foreground: var(--fg-primary);
-}
+/* Plus Jakarta Sans is injected via next/font/google as --font-jakarta */
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-html, body {
-  height: 100%;
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--fg-primary);
-  background: radial-gradient(circle at 50% -20%, #1a0833 0%, var(--bg-primary) 70%);
-  background-attachment: fixed;
-  background-color: var(--bg-primary);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: var(--font-body);
-  line-height: 1.6;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* -- Fonts -- */
+/* ── Font Faces ─────────────────────────────────────────── */
 @font-face {
   font-family: 'Raleway';
   src: url('/fonts/Raleway-Regular.ttf') format('truetype');
@@ -61,7 +12,6 @@ img {
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'Raleway';
   src: url('/fonts/Raleway-Medium.ttf') format('truetype');
@@ -69,7 +19,6 @@ img {
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'Raleway';
   src: url('/fonts/Raleway-Bold.ttf') format('truetype');
@@ -77,7 +26,6 @@ img {
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'Raleway';
   src: url('/fonts/Raleway-Italic.ttf') format('truetype');
@@ -85,7 +33,6 @@ img {
   font-style: italic;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'Lexend';
   src: url('/fonts/Lexend-Regular.ttf') format('truetype');
@@ -94,22 +41,63 @@ img {
   font-display: swap;
 }
 
-/* -- Animations -- */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+/* ── Base Reset ─────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  html, body {
+    height: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    background-color: #080808;
+    color: #ffffff;
+    font-family: var(--font-jakarta), 'Lexend', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-jakarta), 'Raleway', sans-serif;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
 }
 
-@keyframes float {
-  0% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(2deg); }
-  100% { transform: translateY(0px) rotate(0deg); }
-}
+/* ── Utilities ──────────────────────────────────────────── */
+@layer utilities {
+  .text-gradient-brand {
+    background: linear-gradient(135deg, #ffffff 0%, #c084fc 50%, #9b1fe8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 
-.animate-fade-in {
-  animation: fadeIn var(--transition-base) forwards;
-}
+  .text-gradient-white {
+    background: linear-gradient(to bottom, #ffffff 0%, #888888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glow-brand {
+    box-shadow: 0 0 30px rgba(155, 31, 232, 0.4);
+  }
+
+  .animate-delay-100 { animation-delay: 100ms; }
+  .animate-delay-200 { animation-delay: 200ms; }
+  .animate-delay-300 { animation-delay: 300ms; }
+  .animate-delay-400 { animation-delay: 400ms; }
+  .animate-delay-500 { animation-delay: 500ms; }
 }

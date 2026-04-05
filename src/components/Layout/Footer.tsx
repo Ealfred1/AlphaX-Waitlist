@@ -1,23 +1,28 @@
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./Layout.module.css";
 
 const Footer = () => {
   return (
-    <footer className={styles.footer}>
-      <div className={styles.footerText}>
-        <p>&copy; 2026 AlphaX Global Technologies. All rights reserved.</p>
-        <p>Built for the decentralized future.</p>
-      </div>
-
-      <div className={styles.socials}>
-        <Link href="#" className={styles.socialIcon} aria-label="X (Twitter)">
-          <Image src="/twitter-x.svg" alt="X" width={18} height={18} />
+    <footer className="relative z-10 py-10 px-8 flex flex-col items-center gap-5 text-center">
+      <div className="flex gap-4">
+        <Link
+          href="#"
+          aria-label="X (Twitter)"
+          className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-brand/50 transition-all duration-150 hover:-translate-y-0.5"
+        >
+          <Image src="/twitter-x.svg" alt="X" width={16} height={16} />
         </Link>
-        <Link href="#" className={styles.socialIcon} aria-label="LinkedIn">
-          <Image src="/linkedin.svg" alt="LinkedIn" width={20} height={20} />
+        <Link
+          href="#"
+          aria-label="LinkedIn"
+          className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-brand/50 transition-all duration-150 hover:-translate-y-0.5"
+        >
+          <Image src="/linkedin.svg" alt="LinkedIn" width={18} height={18} />
         </Link>
       </div>
+      <p className="text-[12px] text-white/25">
+        &copy; {new Date().getFullYear()} AlphaX Global Technologies. All rights reserved.
+      </p>
     </footer>
   );
 };
