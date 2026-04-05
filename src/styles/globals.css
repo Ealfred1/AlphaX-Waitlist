@@ -55,16 +55,16 @@
     overflow-x: hidden;
     background-color: #080808;
     color: #ffffff;
-    font-family: var(--font-jakarta), 'Lexend', sans-serif;
+    font-family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-jakarta), 'Raleway', sans-serif;
+    font-family: inherit;
     font-weight: 800;
     line-height: 1.05;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
   }
 }
 

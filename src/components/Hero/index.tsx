@@ -90,18 +90,11 @@ const Hero = () => {
         >
           <div className="flex flex-col items-center text-center gap-5" style={{ maxWidth: 520 }}>
 
-            {/* Badge */}
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand/30 bg-brand-muted text-brand-light text-[11px] font-semibold uppercase tracking-widest opacity-0 animate-fade-up"
-              style={{ animationDelay: '50ms', animationFillMode: 'forwards' }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-brand-light" />
-              Early Access — Limited Spots
-            </div>
+
 
             {/* Coin logo */}
             <div
-              className="relative w-24 h-24 opacity-0"
+              className="relative w-28 h-28 opacity-0"
               style={{
                 animation: 'fadeUp 0.8s cubic-bezier(0.4,0,0.2,1) 100ms forwards, float 6s ease-in-out 1s infinite',
               }}
@@ -109,30 +102,31 @@ const Hero = () => {
               <div
                 className="absolute inset-0 rounded-full"
                 style={{
-                  background: 'radial-gradient(circle, rgba(155,31,232,0.5) 0%, transparent 70%)',
-                  filter: 'blur(20px)',
+                  background: 'radial-gradient(circle, rgba(155,31,232,0.6) 0%, transparent 75%)',
+                  filter: 'blur(24px)',
                 }}
               />
               <Image
                 src="/coin.png"
                 alt="AlphaX"
                 fill
-                sizes="96px"
-                className="object-contain drop-shadow-[0_0_24px_rgba(155,31,232,0.7)]"
+                sizes="112px"
+                className="object-contain drop-shadow-[0_0_32px_rgba(155,31,232,0.8)]"
                 priority
               />
             </div>
 
-            {/* Headline — max 2 lines */}
+            {/* Headline — max 2 lines, fix cutoff */}
             <h1
               className="font-heading text-gradient-white opacity-0 animate-fade-up"
               style={{
-                fontSize: 'clamp(2.8rem, 7vw, 4.4rem)',
+                fontSize: 'clamp(3rem, 8vw, 4.8rem)',
                 letterSpacing: '-0.04em',
-                lineHeight: 1.04,
+                lineHeight: 1.15,
                 animationDelay: '150ms',
                 animationFillMode: 'forwards',
-                maxWidth: '13ch',
+                maxWidth: '12ch',
+                paddingBottom: '0.1em',
               }}
             >
               Trade on the edge of{' '}
@@ -145,35 +139,34 @@ const Hero = () => {
               style={{
                 animationDelay: '225ms',
                 animationFillMode: 'forwards',
-                color: 'rgba(255,255,255,0.72)',
-                fontSize: 15,
-                lineHeight: 1.65,
+                color: 'rgba(255,255,255,0.85)',
+                fontSize: 16,
+                fontWeight: 500,
+                lineHeight: 1.6,
                 maxWidth: '38ch',
               }}
             >
-              Institutional-grade liquidity, sub-second finality,
-              and trustless custody — on-chain.
+              Institutional-grade liquidity and trustless
+              custody — built for the decentralized future.
             </p>
 
             {/* Stats */}
             <div
-              className="flex items-center gap-6 py-1 opacity-0 animate-fade-up"
+              className="flex items-center gap-10 py-4 opacity-0 animate-fade-up"
               style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}
             >
               {STATS.map(({ label, value }, i) => (
-                <div key={label} className="flex items-center gap-6">
-                  <div className="text-center">
-                    <div className="font-jakarta font-bold text-xl text-white">{value}</div>
-                    <div className="text-[10px] text-white/35 uppercase tracking-widest mt-0.5">{label}</div>
-                  </div>
-                  {i < STATS.length - 1 && <div className="w-px h-7 bg-white/10" />}
+                <div key={label} className="flex flex-col items-center">
+                  <div className="font-jakarta font-extrabold text-2xl text-white">{value}</div>
+                  <div className="text-[11px] font-bold text-brand-light uppercase tracking-widest mt-1">{label}</div>
                 </div>
               ))}
             </div>
 
-            {/* Inline form — no ElectricBorder wrapping */}
+            {/* Inline form */}
             <div
-              className="w-full opacity-0 animate-fade-up"
+              id="waitlist-form"
+              className="w-full mt-4 opacity-0 animate-fade-up scroll-mt-20"
               style={{ animationDelay: '375ms', animationFillMode: 'forwards' }}
             >
               <WaitlistForm />

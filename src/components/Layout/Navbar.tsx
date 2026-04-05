@@ -1,40 +1,56 @@
+'use client';
+
 import Link from "next/link";
 import Image from "next/image";
+import StarBorder from "@/components/StarBorder";
 
 const Navbar = () => {
+  const scrollToForm = () => {
+    const formElement = document.getElementById('waitlist-form');
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: 'smooth' });
+      // Trigger the form expansion by finding the button and clicking it
+      const joinButton = formElement.querySelector('button');
+      if (joinButton) {
+        joinButton.click();
+      }
+    }
+  };
+
   return (
-    <nav
-      className="relative z-50 flex items-center justify-between px-16 py-6 h-[80px]"
-      style={{
-        background: 'transparent',
-        backdropFilter: 'blur(0px)',
-      }}
-    >
+    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-6 h-[80px] bg-black/10 backdrop-blur-md">
       <div
-        className="flex items-center gap-2 font-heading font-bold tracking-tight text-white"
-        style={{ fontSize: 20, letterSpacing: '-0.02em' }}
+        className="flex items-center gap-3 font-heading font-bold tracking-tight text-white"
+        style={{ fontSize: 22, letterSpacing: '-0.02em' }}
       >
-        <Image src="/alphaX.png" alt="AlphaX" width={26} height={26} className="rounded-md" />
+        <Image src="/alphaX.png" alt="AlphaX logo" width={28} height={28} className="rounded-md" />
         AlphaX
       </div>
 
-      <div className="hidden md:flex items-center gap-8">
+      <div className="hidden lg:flex items-center gap-10">
         {['Protocol', 'Network', 'Governance', 'Ecosystem'].map(link => (
           <Link
             key={link}
             href="#"
-            className="text-[13px] font-medium text-white/50 hover:text-white transition-colors duration-150"
+            className="text-[14px] font-semibold text-white/50 hover:text-white transition-all duration-200 uppercase tracking-widest"
           >
             {link}
           </Link>
         ))}
       </div>
 
-      <div className="flex items-center gap-3">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-brand/30 bg-black/30 text-[11px] text-brand-light font-semibold uppercase tracking-wider backdrop-blur-sm">
-          <span className="w-1.5 h-1.5 rounded-full bg-brand-light animate-pulse" />
-          Waitlist Live
-        </span>
+      <div className="flex items-center">
+        <StarBorder
+          as="button"
+          onClick={scrollToForm}
+          color="#9b1fe8"
+          speed="5s"
+          className="!w-auto"
+        >
+          <span className="flex items-center px-4 py-1.5 font-bold text-xs uppercase tracking-widest bg-black/50 text-white hover:bg-black/80 transition-all duration-300">
+            Join Waitlist
+          </span>
+        </StarBorder>
       </div>
     </nav>
   );
