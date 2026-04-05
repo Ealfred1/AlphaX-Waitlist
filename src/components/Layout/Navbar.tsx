@@ -18,7 +18,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-6 h-[80px] bg-black/10 backdrop-blur-md">
+    <nav className="sticky top-0 left-0 right-0 z-50 flex items-center justify-between px-16 py-6 h-[80px]">
       <div
         className="flex items-center gap-3 font-heading font-bold tracking-tight text-white"
         style={{ fontSize: 22, letterSpacing: '-0.02em' }}
