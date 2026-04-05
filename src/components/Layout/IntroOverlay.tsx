@@ -1,0 +1,156 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+import gsap from 'gsap';
+
+const IntroOverlay = () => {
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const [isDone, setIsDone] = useState(false);
+
+  useEffect(() => {
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setIsDone(true);
+      }
+    });
+
+    // ─────────────────────────────────────────────────────────────
+    // PHASE 0: Initial State (Centered & Large)
+    // ─────────────────────────────────────────────────────────────
+    tl.to(logoRef.current, {
+      duration: 2.2,
+      opacity: 1,
+      scale: 1.8,
+      ease: 'power2.out',
+    });
+
+    // ─────────────────────────────────────────────────────────────
+    // PHASE 1: Move to Navbar position
+    // ─────────────────────────────────────────────────────────────
+    tl.to(logoRef.current, {
+      duration: 1.4,
+      scale: 1,
+      x: () => {
+        const target = document.getElementById('navbar-brand-logo');
+        if (!target) return 0;
+        const rect = target.getBoundingClientRect();
+        const center = window.innerWidth / 2;
+        return rect.left + rect.width / 2 - center;
+      },
+      y: () => {
+        const target = document.getElementById('navbar-brand-logo');
+        if (!target) return 0;
+        const rect = target.getBoundingClientRect();
+        const center = window.innerHeight / 2;
+        return rect.top + rect.height / 2 - center;
+      },
+      ease: 'power4.inOut',
+    });
+
+    // Landing: reveal the actual navbar brand and hide the clone
+    tl.set('#navbar-brand-logo', { opacity: 1 });
+    tl.set(logoRef.current, { opacity: 0 });
+
+    // Fade out the black overlay
+    tl.to(overlayRef.current, {
+      duration: 0.8,
+      opacity: 0,
+      pointerEvents: 'none',
+    }, '-=0.4');
+
+    // ─────────────────────────────────────────────────────────────
+    // PHASE 2: Navbar Reveal (Links staggered + CTA pop)
+    // ─────────────────────────────────────────────────────────────
+    tl.to('#nav-links-container > a', {
+      duration: 0.9,
+      opacity: 1,
+      y: 0,
+      stagger: 0.15, // Increased stagger for better sequential feel
+      ease: 'power4.out',
+    }, '-=0.2');
+
+    tl.to('#nav-cta-container', {
+      duration: 0.7,
+      opacity: 1,
+      scale: 1.25, // More dramatic magnify
+      ease: 'back.out(2)',
+    }, '-=0.5');
+
+    tl.to('#nav-cta-container', {
+      duration: 0.45,
+      scale: 1,
+      ease: 'power3.inOut',
+    });
+
+    // ─────────────────────────────────────────────────────────────
+    // PHASE 3: Background Reveal (Cubes)
+    // ─────────────────────────────────────────────────────────────
+    tl.to('#cubes-bg-container', {
+      duration: 1.8,
+      opacity: 0.85,
+      ease: 'power2.inOut',
+    }, '-=1.2');
+
+    // ─────────────────────────────────────────────────────────────
+    // PHASE 4: Hero Content Reveal (Cinematic "Portal" Coin)
+    // ─────────────────────────────────────────────────────────────
+    
+    // Coin starts off-screen bottom, massive scale for "portal" effect
+    tl.fromTo('#hero-coin-logo', 
+      { opacity: 0, scale: 7, y: 1000 }, // Start from off-screen bottom, massive
+      { opacity: 1, scale: 1, y: 0, duration: 1.6, ease: 'expo.out' }, // Fluid cinematic settle
+      '-=1.0'
+    );
+
+    tl.to([
+      '#hero-headline',
+      '#hero-subheadline',
+      '#hero-stats',
+      '#hero-form',
+      '#hero-bottom-hint'
+    ], {
+      duration: 1.0,
+      opacity: 1,
+      y: 0,
+      stagger: 0.15,
+      ease: 'power4.out',
+    }, '-=0.8');
+
+    return () => {
+      tl.kill();
+    };
+  }, []);
+
+  if (isDone) return null;
+
+  return (
+    <div
+      ref={overlayRef}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black"
+    >
+      <div
+        ref={logoRef}
+        className="flex items-center gap-3 opacity-0"
+      >
+        <Image 
+          src="/alphaX.png" 
+          alt="AlphaX" 
+          width={40} 
+          height={40}
+          className="object-contain" // Removed shadow and rounding for perfect transparency
+          priority
+        />
+        <span 
+          className="text-3xl font-heading font-black tracking-tighter text-white"
+          style={{ letterSpacing: '-0.05em' }}
+        >
+          AlphaX
+        </span>
+      </div>
+    </div>
+  );
+};
+
+export default IntroOverlay;

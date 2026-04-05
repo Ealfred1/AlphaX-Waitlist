@@ -13,12 +13,13 @@ const Cubes = dynamic(() => import('@/components/Cubes'), { ssr: false });
 const CubesBackground = () => {
   return (
     <div
+      id="cubes-bg-container"
       style={{
         position: 'fixed',
         inset: 0,
         zIndex: 0,
         pointerEvents: 'none',
-        opacity: 0.85,
+        opacity: 0, // Initial state: hidden for Intro sequence
       }}
     >
       <Cubes
