@@ -47,12 +47,12 @@ const Hero = () => {
             color="#9b1fe8"
             colorTwo="#c084fc"
             ringCount={7}
-            speed={0.75}
+            speed={0.1} // Ultra-ambient slow-down
             attenuation={7}
             lineThickness={2.5}
             baseRadius={0.22}
             radiusStep={0.09}
-            opacity={0.95}
+            opacity={0.85}
             noiseAmount={0.06}
             followMouse
             mouseInfluence={0.18}

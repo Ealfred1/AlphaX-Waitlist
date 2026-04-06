@@ -27,7 +27,7 @@ const IntroOverlay = () => {
     });
 
     // ─────────────────────────────────────────────────────────────
-    // PHASE 1: Move to Navbar position
+    // PHASE 1: Move to Navbar position (Dynamic coordinate calc)
     // ─────────────────────────────────────────────────────────────
     tl.to(logoRef.current, {
       duration: 1.4,
@@ -49,39 +49,43 @@ const IntroOverlay = () => {
       ease: 'power4.inOut',
     });
 
-    // Landing: reveal the actual navbar brand and hide the clone
+    // CRITICAL: Reveal the actual navbar brand FIRST, while the overlay is still covering it.
+    // This removes the "blip" because the handoff happens behind the clone.
     tl.set('#navbar-brand-logo', { opacity: 1 });
-    tl.set(logoRef.current, { opacity: 0 });
 
     // Fade out the black overlay
     tl.to(overlayRef.current, {
-      duration: 0.8,
+      duration: 1.0,
       opacity: 0,
       pointerEvents: 'none',
-    }, '-=0.4');
-
-    // ─────────────────────────────────────────────────────────────
-    // PHASE 2: Navbar Reveal (Links staggered + CTA pop)
-    // ─────────────────────────────────────────────────────────────
-    tl.to('#nav-links-container > a', {
-      duration: 0.9,
-      opacity: 1,
-      y: 0,
-      stagger: 0.15, // Increased stagger for better sequential feel
-      ease: 'power4.out',
+      ease: 'power2.inOut',
     }, '-=0.2');
 
-    tl.to('#nav-cta-container', {
-      duration: 0.7,
+    // ONLY hide the clone once the overlay is nearly gone
+    tl.set(logoRef.current, { opacity: 0 }, '-=0.4');
+
+    // ─────────────────────────────────────────────────────────────
+    // PHASE 2: Navbar Reveal (Fluid Expo sweep)
+    // ─────────────────────────────────────────────────────────────
+    tl.to('#nav-links-container > a', {
+      duration: 1.4,
       opacity: 1,
-      scale: 1.25, // More dramatic magnify
-      ease: 'back.out(2)',
-    }, '-=0.5');
+      y: 0,
+      stagger: 0.12,
+      ease: 'expo.out', // Use expo for a single, confident sweep
+    }, '-=0.6');
 
     tl.to('#nav-cta-container', {
-      duration: 0.45,
+      duration: 0.8,
+      opacity: 1,
+      scale: 1.2,
+      ease: 'back.out(1.7)',
+    }, '-=0.8');
+
+    tl.to('#nav-cta-container', {
+      duration: 0.4,
       scale: 1,
-      ease: 'power3.inOut',
+      ease: 'power2.inOut',
     });
 
     // ─────────────────────────────────────────────────────────────
@@ -91,17 +95,15 @@ const IntroOverlay = () => {
       duration: 1.8,
       opacity: 0.85,
       ease: 'power2.inOut',
-    }, '-=1.2');
+    }, '-=1.4');
 
     // ─────────────────────────────────────────────────────────────
     // PHASE 4: Hero Content Reveal (Cinematic "Portal" Coin)
     // ─────────────────────────────────────────────────────────────
-    
-    // Coin starts off-screen bottom, massive scale for "portal" effect
     tl.fromTo('#hero-coin-logo', 
-      { opacity: 0, scale: 7, y: 1000 }, // Start from off-screen bottom, massive
-      { opacity: 1, scale: 1, y: 0, duration: 1.6, ease: 'expo.out' }, // Fluid cinematic settle
-      '-=1.0'
+      { opacity: 0, scale: 7, y: 1000 },
+      { opacity: 1, scale: 1, y: 0, duration: 1.6, ease: 'expo.out' },
+      '-=1.2'
     );
 
     tl.to([
@@ -111,12 +113,12 @@ const IntroOverlay = () => {
       '#hero-form',
       '#hero-bottom-hint'
     ], {
-      duration: 1.0,
+      duration: 1.2, // Slightly slower for more "weight"
       opacity: 1,
       y: 0,
-      stagger: 0.15,
-      ease: 'power4.out',
-    }, '-=0.8');
+      stagger: 0.18,
+      ease: 'expo.out', // Match the fluid expo sweep
+    }, '-=1.0');
 
     return () => {
       tl.kill();
@@ -137,14 +139,14 @@ const IntroOverlay = () => {
         <Image 
           src="/alphaX.png" 
           alt="AlphaX" 
-          width={40} 
-          height={40}
-          className="object-contain" // Removed shadow and rounding for perfect transparency
+          width={28} 
+          height={28} 
+          className="object-contain"
           priority
         />
         <span 
-          className="text-3xl font-heading font-black tracking-tighter text-white"
-          style={{ letterSpacing: '-0.05em' }}
+          className="font-heading font-bold tracking-tight text-white" 
+          style={{ fontSize: 22, letterSpacing: '-0.02em' }} 
         >
           AlphaX
         </span>

@@ -77,7 +77,7 @@ const Navbar = () => {
           speed="5s"
           className="!w-auto"
         >
-          <span className="flex items-center px-4 py-1.5 font-bold text-xs uppercase tracking-widest bg-black/50 text-white hover:bg-black/80 transition-all duration-300">
+          <span className="flex items-center px-5 py-2 font-bold text-xs uppercase tracking-[0.15em] text-white hover:text-brand-light transition-all duration-300">
             Join Waitlist
           </span>
         </StarBorder>
