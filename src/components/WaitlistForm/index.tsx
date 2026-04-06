@@ -59,53 +59,66 @@ const WaitlistForm = () => {
     <div className="flex flex-col items-center w-full">
       <div
         ref={containerRef}
-        className={`inline-flex items-center transition-all duration-500 ease-out ${isExpanded ? 'bg-[#05000a] border border-white/50 p-1 rounded-2xl' : 'bg-transparent'
-          }`}
+        className={`inline-flex items-center transition-all duration-500 ease-out group ${
+          isExpanded 
+            ? 'bg-[#05000a] border border-brand/50 p-1.5 rounded-2xl shadow-[0_0_50px_rgba(155,31,232,0.3)]' 
+            : 'bg-transparent'
+        }`}
       >
         <form onSubmit={handleSubmit} className="flex items-center">
           {isExpanded && (
             <div
               ref={inputContainerRef}
-              className="overflow-hidden flex flex-col px-4 py-1.5 text-left"
+              className="overflow-hidden flex flex-col px-6 py-2 text-left min-w-[280px]"
             >
-              <label htmlFor="waitlist-email" className="text-[10px] font-bold text-white/80 leading-none mb-1">
-                Your Email
+              <label htmlFor="waitlist-email" className="text-[11px] font-bold text-brand-light/90 leading-none mb-1.5 tracking-tight">
+                Get Early Access
               </label>
               <input
                 id="waitlist-email"
                 type="email"
-                placeholder="designer@example.com"
+                placeholder="name@company.com"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 required
                 autoFocus
                 autoComplete="email"
-                className="bg-transparent text-[14px] font-medium text-white placeholder-white/80 focus:outline-none w-full"
+                className="bg-transparent text-[16px] font-medium text-white placeholder-white/30 focus:outline-none w-full"
               />
             </div>
           )}
 
-          <div ref={buttonWrapperRef}>
+          <div 
+            ref={buttonWrapperRef}
+            className="relative"
+          >
+            {/* Massive external glow for visibility */}
+            <div className="absolute inset-0 rounded-xl bg-brand/30 blur-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+            <div className="absolute inset-0 rounded-xl shadow-[0_0_35px_rgba(155,31,232,0.45)] group-hover:shadow-[0_0_55px_rgba(155,31,232,0.65)] transition-all duration-500 -z-10" />
+            
             <StarBorder
               as="button"
               type={isExpanded ? "submit" : "button"}
               onClick={toggleExpand}
               disabled={loading}
               color="#9b1fe8"
-              speed="4s"
+              speed="3.5s"
               className="!w-auto"
             >
-              <span className="flex items-center gap-2 font-bold px-1 py-0.5">
+              <span className="flex items-center gap-3 font-extrabold px-6 py-2.5 text-[15px] md:text-[17px] tracking-tight">
                 {loading ? (
                   <>
-                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
                     </svg>
                     Joining...
                   </>
                 ) : (
-                  'Join Waitlist →'
+                  <>
+                    {isExpanded ? 'Secure Spot' : 'Join Waitlist'}
+                    <span className="text-brand-light">→</span>
+                  </>
                 )}
               </span>
             </StarBorder>
