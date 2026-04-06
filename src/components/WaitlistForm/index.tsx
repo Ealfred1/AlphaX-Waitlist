@@ -59,9 +59,8 @@ const WaitlistForm = () => {
     <div className="flex flex-col items-center w-full">
       <div
         ref={containerRef}
-        className={`inline-flex items-center transition-all duration-500 ease-out ${
-          isExpanded ? 'bg-[#05000a] border border-white/15 p-1 rounded-2xl' : 'bg-transparent'
-        }`}
+        className={`inline-flex items-center transition-all duration-500 ease-out ${isExpanded ? 'bg-[#05000a] border border-white/50 p-1 rounded-2xl' : 'bg-transparent'
+          }`}
       >
         <form onSubmit={handleSubmit} className="flex items-center">
           {isExpanded && (
@@ -69,7 +68,7 @@ const WaitlistForm = () => {
               ref={inputContainerRef}
               className="overflow-hidden flex flex-col px-4 py-1.5 text-left"
             >
-              <label htmlFor="waitlist-email" className="text-[10px] font-bold text-white/40 uppercase tracking-widest leading-none mb-1">
+              <label htmlFor="waitlist-email" className="text-[10px] font-bold text-white/80 leading-none mb-1">
                 Your Email
               </label>
               <input
@@ -81,7 +80,7 @@ const WaitlistForm = () => {
                 required
                 autoFocus
                 autoComplete="email"
-                className="bg-transparent text-[14px] font-medium text-white placeholder-white/20 focus:outline-none w-full"
+                className="bg-transparent text-[14px] font-medium text-white placeholder-white/80 focus:outline-none w-full"
               />
             </div>
           )}

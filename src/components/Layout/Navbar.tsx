@@ -36,18 +36,18 @@ const Navbar = () => {
         className="flex items-center gap-3 font-heading font-bold tracking-tight text-white"
         style={{ fontSize: 22, letterSpacing: '-0.02em' }}
       >
-        <Image 
-          src="/alphaX.png" 
-          alt="AlphaX logo" 
-          width={28} 
-          height={28} 
-          className="rounded-md" 
+        <Image
+          src="/alphaX.png"
+          alt="AlphaX logo"
+          width={28}
+          height={28}
+          className="rounded-md"
         />
         AlphaX
       </div>
 
       {/* Primary Links: Staggered entry from Hero timing */}
-      <div 
+      <div
         id="nav-links-container"
         ref={linksRef}
         className="hidden lg:flex items-center gap-10"
@@ -57,7 +57,7 @@ const Navbar = () => {
             key={link}
             id={`nav-link-${i}`}
             href="#"
-            className="text-[14px] font-semibold text-white/50 hover:text-white transition-all duration-200 uppercase tracking-widest"
+            className="text-[14px] font-semibold text-white/50 hover:text-white transition-all duration-200"
           >
             {link}
           </Link>
@@ -65,7 +65,7 @@ const Navbar = () => {
       </div>
 
       {/* CTA: Magnify pop entry */}
-      <div 
+      <div
         id="nav-cta-container"
         ref={ctaRef}
         className="flex items-center"
@@ -77,7 +77,7 @@ const Navbar = () => {
           speed="5s"
           className="!w-auto"
         >
-          <span className="flex items-center px-5 py-2 font-bold text-xs uppercase tracking-[0.15em] text-white hover:text-brand-light transition-all duration-300">
+          <span className="flex items-center px-5 py-2 font-bold text-xs text-white hover:text-brand-light transition-all duration-300">
             Join Waitlist
           </span>
         </StarBorder>

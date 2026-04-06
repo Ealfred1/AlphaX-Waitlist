@@ -47,7 +47,7 @@ const Hero = () => {
             color="#9b1fe8"
             colorTwo="#c084fc"
             ringCount={7}
-            speed={0.1} // Ultra-ambient slow-down
+            speed={0.5} // Ultra-ambient slow-down
             attenuation={7}
             lineThickness={2.5}
             baseRadius={0.22}
@@ -77,7 +77,7 @@ const Hero = () => {
 
         {/* ── Main Hero Content ── */}
         <div className="relative flex flex-col items-center justify-center px-6 pb-20 pt-10" style={{ zIndex: 10, minHeight: '100vh' }}>
-          <div className="flex flex-col items-center text-center gap-8" style={{ maxWidth: 800 }}>
+          <div className="flex flex-col items-center text-center gap-8" style={{ maxWidth: 1000 }}>
 
             {/* Coin logo (Phase 4 GSAP Target: "Portal" Entrance) */}
             <div
@@ -116,7 +116,7 @@ const Hero = () => {
               }}
             >
               Trade on the edge of{' '}
-              <span className="text-gradient-brand">DeFi.</span>
+              <span className="text-gradient-brand">Crypto Markets.</span>
             </h1>
 
             {/* Subheadline (Higher contrast, more presence) */}
@@ -131,12 +131,11 @@ const Hero = () => {
                 maxWidth: '42ch',
               }}
             >
-              Institutional-grade liquidity and trustless
-              custody — built for the decentralized future.
+              Seamless P2P transfers, advanced trading tools, and secure asset management—all in one powerful platform.
             </p>
 
             {/* Stats (More robust spacing) */}
-            <div
+            {/* <div
               id="hero-stats"
               ref={statsRef}
               className="flex items-center gap-14 py-4"
@@ -147,7 +146,7 @@ const Hero = () => {
                   <div className="text-[12px] font-bold text-brand-light uppercase tracking-[0.2em] mt-1.5">{label}</div>
                 </div>
               ))}
-            </div>
+            </div> */}
 
             {/* Waitlist Form */}
             <div
